@@ -1,9 +1,18 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const Routes = require("./Routes/routes");
+const apiConstants = require("./Constants/api");
+
+mongoose.connect(
+  apiConstants.db.url,
+  { useNewUrlParser: true }
+);
 
 const app = express();
 
-// responf Hello world
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-app.listen(3000, () => console.log("Listening on port 3000"));
+app.use(express.json());
+
+app.use("/", Routes);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}`));
