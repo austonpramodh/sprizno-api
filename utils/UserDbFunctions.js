@@ -13,12 +13,27 @@ module.exports.createUser = (newUser, cb) => {
   });
 };
 
+module.exports.updatePassword = (user, newPassword, cb) => {
+  bcrypt.genSalt(encryptionConstants.salt, (errsalt, salt) => {
+    bcrypt.hash(newPassword, salt, (errhash, hash) => {
+      user.uuid = uuidv1();
+      user.password = hash;
+      user.otp = "";
+      console.log(user, "hit112");
+      UserSchema.updateOne({ email: user.email }, user, cb);
+    });
+  });
+};
+
 module.exports.findUser = ({ email }, cb) => {
   UserSchema.findOne({ email }, cb);
 };
 
 module.exports.comparePassword = ({ password, dbPassword }, cb) => {
-  bcrypt.compare(password, dbPassword, (err, isMatch) => {
-    cb(err, isMatch);
-  });
+  bcrypt.compare(password, dbPassword, cb);
+};
+
+// update User
+module.exports.updateUser = (oldData, newData, cb) => {
+  UserSchema.updateOne(oldData, newData, cb);
 };

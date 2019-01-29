@@ -20,5 +20,26 @@ const createTokens = (user) => {
   return { token, refreshToken };
 };
 const refreshTokens = () => {};
+const generateOtpToken = (data) => {
+  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 15) }, "AustonOtp");
+  return token;
+};
+const generateResetToken = (data) => {
+  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 15) }, "AustonReset");
+  return token;
+};
+const verifyOtpToken = (token, cb) => {
+  jwt.verify(token, "AustonOtp", cb);
+};
 
-module.exports = { createTokens, refreshTokens };
+const verifyResetToken = (token, cb) => {
+  jwt.verify(token, "AustonReset", cb);
+};
+module.exports = {
+  createTokens,
+  refreshTokens,
+  generateOtpToken,
+  verifyOtpToken,
+  generateResetToken,
+  verifyResetToken,
+};
