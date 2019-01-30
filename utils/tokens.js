@@ -12,14 +12,16 @@ const createTokens = (user) => {
   );
   const refreshToken = jwt.sign(
     {
-      date: { email: user.email, uuid: user.uuid },
+      data: { email: user.email, uuid: user.uuid },
       exp: Math.floor(Date.now() / 1000 + 60 * 60 * 24 * 7),
     },
     tokenSecret.refreshTokenSecret,
   );
   return { token, refreshToken };
 };
-const refreshTokens = () => {};
+const verifyRefreshToken = (token, cb) => {
+  jwt.verify(token, tokenSecret.refreshTokenSecret, cb);
+};
 const generateOtpToken = (data) => {
   const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 15) }, "AustonOtp");
   return token;
@@ -37,9 +39,9 @@ const verifyResetToken = (token, cb) => {
 };
 module.exports = {
   createTokens,
-  refreshTokens,
   generateOtpToken,
   verifyOtpToken,
   generateResetToken,
   verifyResetToken,
+  verifyRefreshToken,
 };

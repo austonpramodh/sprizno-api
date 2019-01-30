@@ -1,12 +1,11 @@
 const express = require("express");
-const uuid = require("uuid/v1");
 const UserSchema = require("../models/User");
 const UserDbFunctions = require("../utils/UserDbFunctions");
 const errCodes = require("../Constants/errCodes");
 const Tokens = require("../utils/tokens");
 
 const router = express.Router();
-// SignUp Route
+// -------------------------------------SignUp Route
 router.post("/signup", (req, res) => {
   // create user schema from json received
   const newUser = new UserSchema({
@@ -28,7 +27,7 @@ router.post("/signup", (req, res) => {
   });
 });
 
-// Login Route
+// -------------------------------------Login Route
 router.post("/login", (req, res) => {
   console.log("login hit");
   console.log(req.body);
@@ -74,7 +73,7 @@ router.post("/login", (req, res) => {
   });
 });
 
-// forgot Password Route
+// -------------------------------------forgot Password Route
 /* hit reset Route otp from mail */
 router.post("/forgot", (req, res) => {
   const { email } = req.body;
@@ -107,7 +106,7 @@ router.post("/forgot", (req, res) => {
   });
 });
 
-// check otp route
+// -------------------------------------check otp route
 // get otp and check against db and then generate another token and give with uuid and email
 router.post("/otp", (req, res) => {
   const { otp } = req.body;
@@ -137,7 +136,7 @@ router.post("/otp", (req, res) => {
   // check otp against db
 });
 
-// reset Password route
+// -------------------------------------reset Password route
 router.post("/reset", (req, res) => {
   const token = req.headers.authorization;
   Tokens.verifyResetToken(token, (err, decoded) => {
@@ -154,7 +153,6 @@ router.post("/reset", (req, res) => {
             { password: newPassword, dbPassword: user.password },
             (err2, isMatch) => {
               if (err2) {
-                console.log(err2);
                 res.json({ success: false, err2 });
               } else if (isMatch) {
                 res.json({ success: false, err: "same passwords" });
@@ -175,6 +173,28 @@ router.post("/reset", (req, res) => {
   });
 });
 
-// refreshTokens
+// -------------------------------------refreshTokens
+router.get("/refreshtoken", (req, res) => {
+  const token = req.headers.authorization;
+  Tokens.verifyRefreshToken(token, (err, decoded) => {
+    if (err) {
+      res.json({ success: false, err });
+    } else {
+      // verify decoded token against db with uuid
+      UserDbFunctions.findUser({ email: decoded.data.email }, (err1, user) => {
+        if (err1) {
+          res.json({ success: false, err1 });
+        } else if (!user) {
+          res.json({ success: false, err: "User not found" });
+        } else if (decoded.data.uuid === user.uuid) {
+          // generate tokens
+          const tokens = Tokens.createTokens(decoded.data);
+          res.json({ success: true, msg: "Tokens refrehsed", tokens });
+        }
+      });
+    }
+  });
+  // verify token and give new current and refresh token
+});
 
 module.exports = router;

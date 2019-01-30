@@ -5,7 +5,7 @@ const apiConstants = require("./Constants/api");
 
 mongoose.connect(
   apiConstants.db.url,
-  { useNewUrlParser: true }
+  { useNewUrlParser: true },
 );
 
 const app = express();
