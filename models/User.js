@@ -17,15 +17,9 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  newUuid: {
-    type: String,
-    required: false,
-    unique: true,
-  },
   otp: {
     type: String,
     required: false,
-    unique: true,
   },
 });
 

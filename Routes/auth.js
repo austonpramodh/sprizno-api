@@ -12,23 +12,25 @@ router.post("/signup", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
+  console.log(newUser);
   // call db utility for hashing password
   UserDbFunctions.createUser(newUser, (err) => {
     if (err) {
       res.json({
         success: false,
-        message: "user Cannot be registered",
         err,
         errCode: errCodes.USER_ALREADY_REGISTERED,
       });
     } else {
-      res.json({ success: true, message: "User Registered, Please Sign In" });
+      const tokens = Tokens.createTokens(newUser);
+      console.log("reached", tokens);
+      res.json({ success: true, tokens });
     }
   });
 });
 
 // -------------------------------------Login Route
-router.post("/login", (req, res) => {
+router.post("/signin", (req, res) => {
   console.log("login hit");
   console.log(req.body);
   const { email, password } = req.body;
@@ -37,7 +39,7 @@ router.post("/login", (req, res) => {
     if (err) {
       console.log(err, "err");
 
-      res.json({ succes: false, err, errCode: errCodes.SERVER_DB_ERROR });
+      res.json({ succesS: false, err, errCode: errCodes.SERVER_DB_ERROR });
     } else if (!user) {
       console.log("user not found");
       res.json({

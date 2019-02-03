@@ -23,11 +23,11 @@ const verifyRefreshToken = (token, cb) => {
   jwt.verify(token, tokenSecret.refreshTokenSecret, cb);
 };
 const generateOtpToken = (data) => {
-  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 15) }, "AustonOtp");
+  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 30) }, "AustonOtp");
   return token;
 };
 const generateResetToken = (data) => {
-  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 15) }, "AustonReset");
+  const token = jwt.sign({ data, exp: Math.floor(Date.now() / 1000 + 60 * 30) }, "AustonReset");
   return token;
 };
 const verifyOtpToken = (token, cb) => {

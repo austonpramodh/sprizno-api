@@ -19,7 +19,6 @@ module.exports.updatePassword = (user, newPassword, cb) => {
       user.uuid = uuidv1();
       user.password = hash;
       user.otp = "";
-      console.log(user, "hit112");
       UserSchema.updateOne({ email: user.email }, user, cb);
     });
   });
