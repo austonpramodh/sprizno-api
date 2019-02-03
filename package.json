@@ -8,6 +8,13 @@
     "lint": "eslint src -c .eslintrc.js --ext js,jsx",
     "precommit": "lint-staged"
   },
+  "lint-staged": {
+    "*.js": [
+      "yarn fix-code",
+      "yarn lint",
+      "git add"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://hummingbrick@dev.azure.com/hummingbrick/rollswitch/_git/rollswitch-server-backend"
@@ -24,7 +31,10 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.3",
     "nodemon": "^1.18.9",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "prettier-eslint": "^8.8.2"
   },
   "dependencies": {
     "bcrypt": "^3.0.3",
