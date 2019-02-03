@@ -4,7 +4,7 @@ module.exports = {
     "linebreak-style": 0,
     "global-require": 0,
     "eslint linebreak-style": [0, "error", "windows"],
-    "no-console": 1,
+    "no-console": "error",
     semi: "error",
     "no-underscore-dangle": 0,
     "padded-blocks": "error",

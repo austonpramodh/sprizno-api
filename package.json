@@ -1,5 +1,5 @@
 {
-  "name": "rollswitch-server-backend",
+  "name": "api-seller-server",
   "version": "1.0.0",
   "description": "Server Backend for RollSwitch Project",
   "main": "index.js",
