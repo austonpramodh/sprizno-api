@@ -7,14 +7,16 @@ const promise = new Promise((resolve, reject) => {
 
 promise
   .then((result) => {
-    console.log("RESOLVE");
+    // console.log("RESOLVE");
+    // eslint-disable-next-line no-console
     console.log(result);
   })
   .catch((err) => {
-    console.log("REJECT");
+    // console.log("REJECT");
+    // eslint-disable-next-line no-console
     console.log(err);
   });
 
 setInterval(() => {
-  console.log("hello world");
+  // console.log("hello world");
 }, 1000);

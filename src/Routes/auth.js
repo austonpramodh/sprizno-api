@@ -12,7 +12,6 @@ router.post("/signup", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-  console.log(newUser);
   // call db utility for hashing password
   UserDbFunctions.createUser(newUser, (err) => {
     if (err) {
@@ -23,7 +22,6 @@ router.post("/signup", (req, res) => {
       });
     } else {
       const tokens = Tokens.createTokens(newUser);
-      console.log("reached", tokens);
       res.json({ success: true, tokens });
     }
   });
@@ -31,17 +29,17 @@ router.post("/signup", (req, res) => {
 
 // -------------------------------------Login Route
 router.post("/signin", (req, res) => {
-  console.log("login hit");
-  console.log(req.body);
+  // console.log("login hit");
+  // console.log(req.body);
   const { email, password } = req.body;
   // find in db and match password
   UserDbFunctions.findUser({ email }, (err, user) => {
     if (err) {
-      console.log(err, "err");
+      // console.log(err, "err");
 
       res.json({ succesS: false, err, errCode: errCodes.SERVER_DB_ERROR });
     } else if (!user) {
-      console.log("user not found");
+      // console.log("user not found");
       res.json({
         success: false,
         err: "user not found",
@@ -51,8 +49,8 @@ router.post("/signin", (req, res) => {
       // Compare password and then generate token
       UserDbFunctions.comparePassword({ password, dbPassword: user.password }, (err1, isMatch) => {
         if (err1) {
-          console.log("err1");
-          console.log(err1);
+          // console.log("err1");
+          // console.log(err1);
           res.json({ success: false, err1, errCode: errCodes.SERVER_PASSWORD_MATCHING_ERROR });
         } else if (isMatch) {
           // create token and refresh token and send
@@ -81,11 +79,11 @@ router.post("/forgot", (req, res) => {
   const { email } = req.body;
   UserDbFunctions.findUser({ email }, (err, user) => {
     if (err) {
-      console.log(err, "err");
+      // console.log(err, "err");
 
       res.json({ succes: false, err, errCode: errCodes.SERVER_DB_ERROR });
     } else if (!user) {
-      console.log("user not found");
+      // console.log("user not found");
       res.json({
         success: false,
         err: "user not found",
@@ -93,7 +91,7 @@ router.post("/forgot", (req, res) => {
       });
     } else {
       const otp = Math.floor(1000 + Math.random() * 9000);
-      console.log(otp);
+      // console.log(otp);
       const token = Tokens.generateOtpToken({ email });
       UserDbFunctions.updateUser({ email }, { otp }, (err1) => {
         if (err1) {
@@ -119,7 +117,7 @@ router.post("/otp", (req, res) => {
       res.json({ success: false, err });
     } else {
       // verify otp against decoded token
-      console.log(decoded, otp);
+      // console.log(decoded, otp);
       UserDbFunctions.findUser(decoded.data, (err1, user) => {
         if (err1) {
           res.json({ success: false, err });

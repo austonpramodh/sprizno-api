@@ -7,13 +7,14 @@ function resolveAfter2Seconds() {
 }
 
 async function asyncCall() {
-  console.log("calling");
+  // console.log("calling");
   const result = await resolveAfter2Seconds().catch(err => err);
+  // eslint-disable-next-line no-console
   console.log(result);
   // expected output: 'resolved'
 }
 
 asyncCall();
 setInterval(() => {
-  console.log("hello world");
+  // console.log("hello world");
 }, 500);
