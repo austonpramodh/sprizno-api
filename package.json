@@ -1,7 +1,7 @@
 {
-  "name": "api-seller-server",
-  "version": "1.0.0",
-  "description": "Server Backend for RollSwitch Project",
+  "name": "ecommerce-api-seller",
+  "version": "0.1.0",
+  "description": "Server Backend for Ecommerce Project",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
