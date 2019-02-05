@@ -3,7 +3,10 @@ const uuidv1 = require("uuid/v1");
 const UserSchema = require("../models/User");
 const encryptionConstants = require("../Constants/encryption");
 
-module.exports.createUser = (newUser, cb) => {
+module.exports.createUser = (user, cb) => {
+  const newUser = new UserSchema({
+    ...user,
+  });
   bcrypt.genSalt(encryptionConstants.salt, (errsalt, salt) => {
     bcrypt.hash(newUser.password, salt, (errhash, hash) => {
       newUser.password = hash;

@@ -1,19 +1,12 @@
-const express = require("express");
-const UserSchema = require("../models/User");
+const router = require("express").Router();
 const UserDbFunctions = require("../utils/UserDbFunctions");
 const errCodes = require("../Constants/errCodes");
 const Tokens = require("../utils/tokens");
 
-const router = express.Router();
 // -------------------------------------SignUp Route
 router.post("/signup", (req, res) => {
   // create user schema from json received
-  const newUser = new UserSchema({
-    email: req.body.email,
-    password: req.body.password,
-  });
-  // call db utility for hashing password
-  UserDbFunctions.createUser(newUser, (err) => {
+  UserDbFunctions.createUser({ ...req.body }, (err, user) => {
     if (err) {
       res.json({
         success: false,
@@ -21,7 +14,7 @@ router.post("/signup", (req, res) => {
         errCode: errCodes.USER_ALREADY_REGISTERED,
       });
     } else {
-      const tokens = Tokens.createTokens(newUser);
+      const tokens = Tokens.createTokens(user);
       res.json({ success: true, tokens });
     }
   });
@@ -95,7 +88,7 @@ router.post("/forgot", (req, res) => {
       const token = Tokens.generateOtpToken({ email });
       UserDbFunctions.updateUser({ email }, { otp }, (err1) => {
         if (err1) {
-          res.json({ success: false, err });
+          res.json({ success: false, err, errCode: errCodes.ERROR_UPDATING_USER });
         } else {
           // store new id and otp in db
           // Send Mail and then send response
@@ -196,5 +189,7 @@ router.get("/refreshtoken", (req, res) => {
   });
   // verify token and give new current and refresh token
 });
+
+// -------------update Password Route
 
 module.exports = router;

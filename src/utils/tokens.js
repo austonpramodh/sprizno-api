@@ -6,7 +6,7 @@ const createTokens = (user) => {
   const token = jwt.sign(
     {
       data: { email: user.email },
-      exp: Math.floor(Date.now() / 1000 + 60 * 15),
+      exp: Math.floor(Date.now() / 1000 + 60 * 60),
     },
     tokenSecret.tokenSecret,
   );
@@ -37,6 +37,15 @@ const verifyOtpToken = (token, cb) => {
 const verifyResetToken = (token, cb) => {
   jwt.verify(token, "AustonReset", cb);
 };
+
+const extractUserEmail = (token) => {
+  const { email } = jwt.decode(token).data;
+  return email;
+};
+const extractTokenRequest = (req) => {
+  const { authorization } = req.headers;
+  return authorization;
+};
 module.exports = {
   createTokens,
   generateOtpToken,
@@ -44,4 +53,6 @@ module.exports = {
   generateResetToken,
   verifyResetToken,
   verifyRefreshToken,
+  extractUserEmail,
+  extractTokenRequest,
 };
