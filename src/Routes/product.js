@@ -14,14 +14,14 @@ router.post("/add", (req, res) => {
   });
 });
 
-router.get("/get", (req, res) => {
+router.get("/getall", (req, res) => {
   const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));
   ProductDbFunctions.getAll(userEmail, (err, data) => {
     res.json({ data });
   });
 });
 
-// delete products --------------
+// delete product --------------
 router.post("/delete", (req, res) => {
   const { _id } = req.body;
   ProductDbFunctions.delete(_id, (err) => {
