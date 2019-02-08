@@ -13,7 +13,7 @@ const ProductSchema = new Schema({
   },
   manufacturer: {
     type: String,
-    required: true,
+    required: false,
     unique: false,
   },
   description: {
@@ -27,6 +27,11 @@ const ProductSchema = new Schema({
   price: {
     type: Number,
     required: false,
+  },
+  createdAT: {
+    type: Number,
+    required: false,
+    default: Date.now(),
   },
 });
 

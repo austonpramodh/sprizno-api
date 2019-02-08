@@ -21,6 +21,10 @@ const sellerSchema = new Schema({
     type: String,
     required: false,
   },
+  createdAT: {
+    type: Number,
+    default: Date.now(),
+  },
 });
 
 module.exports = mongoose.model("Seller", sellerSchema, "sellers");

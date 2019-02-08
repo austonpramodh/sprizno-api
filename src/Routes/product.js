@@ -9,7 +9,7 @@ router.post("/add", (req, res) => {
   body.seller = userEmail;
   ProductDbFunctions.add(body, (err) => {
     if (err) {
-      res.json({ err: "adding product" });
+      res.json({ err, errmsg: "adding product" });
     } else res.json({ success: true });
   });
 });
@@ -17,14 +17,14 @@ router.post("/add", (req, res) => {
 router.get("/getall", (req, res) => {
   const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));
   ProductDbFunctions.getAll(userEmail, (err, data) => {
-    res.json({ data });
+    res.json({ success: true, data: [...data] });
   });
 });
 
 // delete product --------------
 router.post("/delete", (req, res) => {
-  const { _id } = req.body;
-  ProductDbFunctions.delete(_id, (err) => {
+  const { id } = req.body;
+  ProductDbFunctions.delete(id, (err) => {
     if (err) {
       res.json({ errCode: errCodes.ERROR_DELETING_PRODUCT });
     } else res.json({ success: true });

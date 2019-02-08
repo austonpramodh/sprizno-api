@@ -12,7 +12,7 @@ module.exports.getAll = (userEmail, cb) => {
 };
 
 module.exports.delete = (_id, cb) => {
-  ProductSchema.deleteOne({ _id }, cb);
+  ProductSchema.findByIdAndDelete(_id, cb);
 };
 
 module.exports.update = (product, cb) => {
