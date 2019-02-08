@@ -1,5 +1,5 @@
 {
-  "name": "sprizno-api",
+  "name": "ecommerce-api-seller",
   "version": "0.1.0",
   "description": "Server Backend for Ecommerce Project",
   "main": "src/index.js",
@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/austonpramodh/sprizno/tree/api/master"
+    "url": "https://hummingbrick@dev.azure.com/hummingbrick/rollswitch/_git/rollswitch-server-backend"
   },
-  "author": "Auston Pramodh Barboza",
+  "author": "hummingbrick team",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^5.3.0",
