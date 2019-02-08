@@ -16,6 +16,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", Routes);
+app.get("/", (req, res) => {
+  res.send("Hello, Not Allowed112");
+});
 
 const port = process.env.PORT || 5000;
 // eslint-disable-next-line no-console

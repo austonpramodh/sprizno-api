@@ -3,6 +3,10 @@ const UserDbFunctions = require("../utils/UserDbFunctions");
 const errCodes = require("../Constants/errCodes");
 const Tokens = require("../utils/tokens");
 
+// ---------------------test route
+router.get("/test", (req, res) => {
+  res.json({ success: true, msg: "allOK" });
+});
 // -------------------------------------SignUp Route
 router.post("/signup", (req, res) => {
   // create user schema from json received

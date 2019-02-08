@@ -6,8 +6,5 @@ const router = express.Router();
 
 router.use("/auth", authRoutes);
 router.use("/product", productRoutes);
-router.get("/", (req, res) => {
-  res.send("Hello, Not Allowed");
-});
 
 module.exports = router;
