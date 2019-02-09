@@ -16,8 +16,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", Routes);
-app.get("/", (req, res) => {
-  res.send("Hello, Not Allowed112");
+
+app.use((req, res) => {
+  res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
 
 const port = process.env.PORT || 5000;
