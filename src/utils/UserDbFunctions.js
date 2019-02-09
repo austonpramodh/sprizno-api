@@ -1,16 +1,19 @@
 // const bcrypt = require("bcrypt");
-// const uuidv1 = require("uuid/v1");
+const uuidv1 = require("uuid/v1");
+const argon2 = require("argon2");
 const UserSchema = require("../models/User");
 // const encryptionConstants = require("../Constants/encryption");
 
-module.exports.createUser = (user, cb) => {
+module.exports.createUser = async (user, cb) => {
   const newUser = new UserSchema({
     ...user,
   });
+  const hash = await argon2.hash(newUser.password);
+  newUser.password = hash;
   // bcrypt.genSalt(encryptionConstants.salt, (errsalt, salt) => {
   // bcrypt.hash(newUser.password, salt, (errhash, hash) => {
   // newUser.password = hash;
-  // newUser.uuid = uuidv1();
+  newUser.uuid = uuidv1();
   newUser.save(cb);
   // });
   // });
