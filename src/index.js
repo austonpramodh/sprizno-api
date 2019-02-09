@@ -17,12 +17,13 @@ app.use(express.json());
 
 app.use("/", Routes);
 
+app.get("/check", (req, res) => {
+  res.status(200).send("Hello, this is API server");
+});
+
 app.use((req, res) => {
   res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
-setInterval(() => {
-  console.log("hlello world");
-}, 1000);
 const port = process.env.PORT || 5000;
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Listening on port ${port}`));
