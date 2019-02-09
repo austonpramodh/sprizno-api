@@ -39,7 +39,6 @@
     "prettier-eslint-cli": "^4.7.1"
   },
   "dependencies": {
-    "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -50,10 +49,5 @@
     "passport-local": "^1.0.0",
     "uuid": "^3.3.2",
     "yarn": "^1.13.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
