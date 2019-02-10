@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/", Routes);
 
 app.get("/check", (req, res) => {
-  res.status(200).send("Hello, this is API server");
+  res.status(200).send("Hello, this is API server only");
 });
 
 app.use((req, res) => {
