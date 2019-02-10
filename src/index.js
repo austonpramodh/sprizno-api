@@ -21,6 +21,10 @@ app.get("/check", (req, res) => {
   res.status(200).send("Hello, this is API server only");
 });
 
+app.get("/nodeversion", (req, res) => {
+  res.status(200).send(`Hello , Node version is ${process.versions.node}`);
+});
+
 app.use((req, res) => {
   res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
