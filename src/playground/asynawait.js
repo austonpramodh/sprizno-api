@@ -1,7 +1,9 @@
 function resolveAfter2Seconds() {
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error("Rejected"));
+      // reject(new Error("Rejected"));
+      resolve("resolved");
     }, 2000);
   });
 }
@@ -16,5 +18,6 @@ async function asyncCall() {
 
 asyncCall();
 setInterval(() => {
-  // console.log("hello world");
+  // eslint-disable-next-line no-console
+  console.log("hello world");
 }, 500);
