@@ -49,5 +49,13 @@
     "passport-local": "^1.0.0",
     "uuid": "^3.3.2",
     "yarn": "^1.13.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "engines": {
+    "node": "10.14.1"
   }
 }
