@@ -98,7 +98,7 @@ call :SelectNodeVersion
 echo Installing NPM Packages
 IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd !NPM_CMD! install
+  call :ExecuteCmd !NPM_CMD! install --production
   echo Installing NPM Packages Complete
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
