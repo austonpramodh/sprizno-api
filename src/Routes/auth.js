@@ -167,7 +167,7 @@ router.post("/reset", (req, res) => {
 });
 
 // -------------------------------------refreshTokens
-router.get("/refreshtoken", (req, res) => {
+router.get("/refreshtokens", (req, res) => {
   const token = req.headers.authorization;
   Tokens.verifyRefreshToken(token, (err, decoded) => {
     if (err) {

@@ -9,7 +9,7 @@ router.post("/add", (req, res) => {
   body.seller = userEmail;
   ProductDbFunctions.add(body, (err) => {
     if (err) {
-      res.json({ err, errmsg: "adding product" });
+      res.json({ err, errCode: errCodes.ERROR_ADDING_PRODUCT, errmsg: "adding product" });
     } else res.json({ success: true });
   });
 });
@@ -35,7 +35,7 @@ router.post("/delete", (req, res) => {
 router.post("/update", (req, res) => {
   ProductDbFunctions.update(req.body, (err) => {
     if (err) {
-      res.json({ err });
+      res.json({ err, errCode: errCodes.ERROR_UPDATING_PRODUCT });
     } else res.json({ success: true });
   });
 });
