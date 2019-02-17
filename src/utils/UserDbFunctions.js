@@ -1,7 +1,7 @@
 const uuidv1 = require("uuid/v1");
 const crypto = require("crypto");
 const UserSchema = require("../models/User");
-const cryptoConfig = require("../Constants/cryptoConfig");
+const cryptoConfig = require("./Constants/cryptoConfig");
 
 module.exports.createUser = async (user, callback) => {
   const newUser = new UserSchema({

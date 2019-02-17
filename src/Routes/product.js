@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const ProductDbFunctions = require("../utils/ProductDBFunctions");
 const Tokens = require("../utils/tokens");
-const errCodes = require("../Constants/errCodes");
+const errCodes = require("../utils/Constants/errCodes");
 
 router.post("/add", (req, res) => {
   const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));

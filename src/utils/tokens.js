@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const tokenSecret = require("../Constants/tokenSecret");
+const tokenSecret = require("./Constants/tokenSecret");
 // get User Oject and create token,refreshToken and return
 const createTokens = (user) => {
   // generate Token and return
@@ -43,8 +43,14 @@ const extractUserEmail = (token) => {
   return email;
 };
 const extractTokenRequest = (req) => {
-  const { authorization } = req.headers;
-  return authorization;
+  if (req.headers && req.headers.authorization) {
+    const { authorization } = req.headers;
+    return authorization;
+  }
+  return null;
+};
+const verifyToken = (token, cb) => {
+  jwt.verify(token, tokenSecret.tokenSecret, cb);
 };
 module.exports = {
   createTokens,
@@ -55,4 +61,5 @@ module.exports = {
   verifyRefreshToken,
   extractUserEmail,
   extractTokenRequest,
+  verifyToken,
 };

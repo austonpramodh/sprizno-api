@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const UserDbFunctions = require("../utils/UserDbFunctions");
-const errCodes = require("../Constants/errCodes");
+const errCodes = require("../utils/Constants/errCodes");
 const Tokens = require("../utils/tokens");
 
 // -------------------------------------SignUp Route
