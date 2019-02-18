@@ -4,7 +4,7 @@
   "description": "Server Backend for Ecommerce Project",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "dev": "nodemon",
     "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",
     "lint": "eslint src"

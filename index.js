@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Routes = require("./Routes/routes");
-const apiConstants = require("./utils/Constants/api");
-const clientValidate = require("./utils/middlewares/clientValidate");
+const Routes = require("./src/Routes/routes");
+const apiConstants = require("./src/utils/Constants/api");
+const clientValidate = require("./src/utils/middlewares/clientValidate");
 
 mongoose.connect(
   apiConstants.db.url,
