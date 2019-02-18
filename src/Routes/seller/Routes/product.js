@@ -4,7 +4,7 @@ const Tokens = require("../../../utils/tokenFunctions");
 const errCodes = require("../../../utils/Constants/errCodes");
 
 router.post("/add", (req, res) => {
-  const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));
+  const userEmail = Tokens.extractUserEmail(Tokens.extractTokenFromRequest(req));
   const { body } = req;
   body.seller = userEmail;
   ProductDbFunctions.add(body, (err) => {

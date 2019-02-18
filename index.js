@@ -7,7 +7,7 @@ const clientValidate = require("./src/utils/middlewares/clientValidate");
 
 mongoose.connect(
   apiConstants.DB.URL,
-  { useNewUrlParser: true },
+  { useNewUrlParser: true, useCreateIndex: true },
 );
 
 const app = express();
