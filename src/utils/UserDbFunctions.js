@@ -1,12 +1,8 @@
 const uuidv1 = require("uuid/v1");
 const crypto = require("crypto");
-const UserSchema = require("../models/User");
 const cryptoConfig = require("./Constants/cryptoConfig");
 
-module.exports.createUser = async (user, callback) => {
-  const newUser = new UserSchema({
-    ...user,
-  });
+module.exports.createUser = async (newUser, callback) => {
   crypto.randomBytes(cryptoConfig.saltBytes, (err, salt) => {
     salt = salt.toString("hex");
     if (err) {
@@ -30,6 +26,34 @@ module.exports.createUser = async (user, callback) => {
     );
     return null;
   });
+};
+
+module.exports.findUser = (email, Schema, cb) => {
+  Schema.findOne({ email }, cb);
+};
+
+module.exports.comparePassword = ({ password, dbPassword }, callback) => {
+  // get salt out
+  const salt = dbPassword.split("$")[0];
+  // get out he hash
+  const dbHash = dbPassword.split("$")[1];
+  crypto.pbkdf2(
+    password,
+    salt,
+    cryptoConfig.iterations,
+    cryptoConfig.hashBytes,
+    null,
+    (err, hash) => {
+      if (err) return callback(err, false);
+      callback(null, hash.toString("hex") === dbHash);
+      return null;
+    },
+  );
+};
+// --------------------------------------------- Not Completed
+// update User
+module.exports.updateUser = (oldData, newData, Schema, cb) => {
+  Schema.updateOne(oldData, newData, cb);
 };
 
 module.exports.updatePassword = (user, newPassword, callback) => {
@@ -64,32 +88,4 @@ module.exports.updatePassword = (user, newPassword, callback) => {
     );
     return null;
   });
-};
-
-module.exports.findUser = ({ email }, cb) => {
-  UserSchema.findOne({ email }, cb);
-};
-
-module.exports.comparePassword = ({ password, dbPassword }, callback) => {
-  // get salt out
-  const salt = dbPassword.split("$")[0];
-  // get out he hash
-  const dbHash = dbPassword.split("$")[1];
-  crypto.pbkdf2(
-    password,
-    salt,
-    cryptoConfig.iterations,
-    cryptoConfig.hashBytes,
-    null,
-    (err, hash) => {
-      if (err) return callback(err, false);
-      callback(null, hash.toString("hex") === dbHash);
-      return null;
-    },
-  );
-};
-
-// update User
-module.exports.updateUser = (oldData, newData, cb) => {
-  UserSchema.updateOne(oldData, newData, cb);
 };

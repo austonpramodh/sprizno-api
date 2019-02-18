@@ -1,4 +1,4 @@
-const TokensFunctions = require("../tokens");
+const TokensFunctions = require("../tokenFunctions");
 const errCodes = require("../Constants/errCodes");
 
 const isAuthenticate = (request, response, next) => {
