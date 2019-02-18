@@ -1,14 +1,16 @@
 const TokensFunctions = require("../tokenFunctions");
 const errCodes = require("../Constants/errCodes");
 
-const isAuthenticate = (request, response, next) => {
-  const token = TokensFunctions.extractTokenRequest(request);
+const isAuthenticated = secret => (request, response, next) => {
+  const token = TokensFunctions.extractTokenFromRequest(request);
   if (token) {
-    TokensFunctions.verifyToken(token, (err) => {
+    TokensFunctions.verifyToken(token, secret, (err) => {
       if (err) {
-        response
-          .status(403)
-          .json({ success: false, errCode: errCodes.INVALID_TOKEN, errmessage: err });
+        response.status(403).json({
+          success: false,
+          errCode: errCodes.INVALID_TOKEN,
+          errmessage: err,
+        });
       } else next();
     });
   } else {
@@ -18,4 +20,4 @@ const isAuthenticate = (request, response, next) => {
   }
 };
 
-module.exports = isAuthenticate;
+module.exports = isAuthenticated;

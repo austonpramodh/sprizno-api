@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const ProductDbFunctions = require("../../utils/ProductDBFunctions");
-const Tokens = require("../../utils/tokenFunctions");
-const errCodes = require("../../utils/Constants/errCodes");
+const ProductDbFunctions = require("../DbFunctions/ProductDBFunctions");
+const Tokens = require("../../../utils/tokenFunctions");
+const errCodes = require("../../../utils/Constants/errCodes");
 
 router.post("/add", (req, res) => {
   const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));
@@ -15,7 +15,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/getall", (req, res) => {
-  const userEmail = Tokens.extractUserEmail(Tokens.extractTokenRequest(req));
+  const userEmail = Tokens.extractUserEmail(Tokens.extractTokenFromRequest(req));
   ProductDbFunctions.getAll(userEmail, (err, data) => {
     res.json({ success: true, data: [...data] });
   });

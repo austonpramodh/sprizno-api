@@ -6,7 +6,7 @@ const apiConstants = require("./src/utils/Constants/api");
 const clientValidate = require("./src/utils/middlewares/clientValidate");
 
 mongoose.connect(
-  apiConstants.db.url,
+  apiConstants.DB.URL,
   { useNewUrlParser: true },
 );
 

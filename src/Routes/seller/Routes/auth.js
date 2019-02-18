@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const Schema = require("./models/user");
-const authentication = require("../../utils/authentication");
-const TokenSecrets = require("./Constants/TokenSecrets");
+const Schema = require("../models/user");
+const authentication = require("../../../utils/authentication");
+const TokenSecrets = require("../Constants/TokenSecrets");
 
 // -------------------------------------SignUp Route
 router.post("/signup", authentication.signup(Schema, TokenSecrets));
