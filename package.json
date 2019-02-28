@@ -2,7 +2,7 @@
   "name": "sprizno-api",
   "version": "0.1.0",
   "description": "Server Backend for Ecommerce Project",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon",
@@ -39,6 +39,7 @@
     "prettier-eslint-cli": "^4.7.1"
   },
   "dependencies": {
+    "@azure/storage-blob": "^10.3.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",

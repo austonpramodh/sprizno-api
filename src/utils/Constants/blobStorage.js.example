@@ -1,0 +1,8 @@
+module.exports = {
+  STORAGE_ACCOUNT_NAME: "Paste your STORAGE_ACCOUNT_NAME Inside Double Quotes",
+  STORAGE_ACCOUNT_KEY:
+    "Paste your STORAGE_ACCOUNT_KEY Inside Double Quotes",
+  CONTAINERS: {
+    IMAGE: "Paste your CONTAINER_NAME Inside Double Quotes",
+  },
+};

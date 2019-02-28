@@ -1,0 +1,11 @@
+const api = {
+  DB: {
+    URL:
+      "PASTE YOUR DB URL WITH USERNAME AND PASSWORD in DOUBLE QUOTES",
+  },
+  HEADERS: {
+    AUTHORIZATION: "authorization",
+  },
+};
+
+module.exports = api;

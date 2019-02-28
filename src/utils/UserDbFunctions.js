@@ -13,7 +13,7 @@ module.exports.createUser = async (newUser, callback) => {
       salt,
       cryptoConfig.iterations,
       cryptoConfig.hashBytes,
-      null,
+      "SHA1",
       (err1, hash) => {
         if (err1) return callback(err1);
         hash = hash.toString("hex");
@@ -42,7 +42,7 @@ module.exports.comparePassword = ({ password, dbPassword }, callback) => {
     salt,
     cryptoConfig.iterations,
     cryptoConfig.hashBytes,
-    null,
+    "SHA1",
     (err, hash) => {
       if (err) return callback(err, false);
       callback(null, hash.toString("hex") === dbHash);
