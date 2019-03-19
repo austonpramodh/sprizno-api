@@ -7,7 +7,7 @@ const createTokens = (user, tokenSecrets) => {
   const token = jwt.sign(
     {
       data: { email },
-      exp: Math.floor(Date.now() / 1000 + 60),
+      exp: Math.floor(Date.now() / 1000 + 60 * 60 * 2),
     },
     tokenSecrets.token,
   );

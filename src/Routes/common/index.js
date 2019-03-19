@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const sastoken = require("./blobStorageToken");
 
-router.get("/sastoken", sastoken);
+router.use((req, res) => {
+  res.send("welcome to common routes");
+});
 
 module.exports = router;

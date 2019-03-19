@@ -7,10 +7,10 @@ router.post("/add", (req, res) => {
   const userEmail = Tokens.extractUserEmail(Tokens.extractTokenFromRequest(req));
   const { body } = req;
   body.seller = userEmail;
-  ProductDbFunctions.add(body, (err) => {
+  ProductDbFunctions.add(body, (err, product) => {
     if (err) {
       res.json({ err, errCode: errCodes.ERROR_ADDING_PRODUCT, errmsg: "adding product" });
-    } else res.json({ success: true });
+    } else res.json({ success: true, data: { ...product } });
   });
 });
 
