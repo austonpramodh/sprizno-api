@@ -112,12 +112,12 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-:: 4. Cleanig Repository
-echo Cleaning Repository Folder
-IF EXIST "%DEPLOYMENT_SOURCE%\node_modules" (
-  rm -r "%DEPLOYMENT_SOURCE%\node_modules"
-    echo Cleaning Completed
-)
+REM :: 4. Cleanig Repository
+REM echo Cleaning Repository Folder
+REM IF EXIST "%DEPLOYMENT_SOURCE%\node_modules" (
+REM   rm -r "%DEPLOYMENT_SOURCE%\node_modules"
+REM     echo Cleaning Completed
+REM )
 
 
 

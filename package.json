@@ -36,7 +36,8 @@
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1"
+    "prettier-eslint-cli": "^4.7.1",
+    "yarn": "^1.13.0"
   },
   "dependencies": {
     "@azure/storage-blob": "^10.3.0",
@@ -45,11 +46,7 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.3",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "uuid": "^3.3.2",
-    "yarn": "^1.13.0"
+    "uuid": "^3.3.2"
   },
   "husky": {
     "hooks": {
