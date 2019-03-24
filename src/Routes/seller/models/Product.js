@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
-const uuidv1 = require("uuid/v1");
 
 const { Schema } = mongoose;
 
 const ProductSchema = new Schema({
-  id: {
-    type: String,
-    required: false,
-    default: uuidv1(),
-  },
   seller: {
     type: String,
     required: false,
@@ -58,6 +52,11 @@ const ProductSchema = new Schema({
     type: Number,
     required: false,
     default: 0,
+  },
+  isDeleted: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 
