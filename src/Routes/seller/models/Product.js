@@ -43,7 +43,12 @@ const ProductSchema = new Schema({
     required: false,
     default: 0,
   },
-  stockLeft: {
+  totalStockSold: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  stock: {
     type: Number,
     required: false,
     default: 0,

@@ -5,7 +5,11 @@ module.exports.add = (data, cb) => {
     ...data,
   });
   newProduct.save((err, product) => {
-    cb(err, product._doc);
+    if (product && product._doc && !err) {
+      cb(err, product._doc);
+    } else {
+      cb(err);
+    }
   });
 };
 
