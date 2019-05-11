@@ -18,5 +18,4 @@ const api = {
   },
 };
 
-// test
 module.exports = api;
